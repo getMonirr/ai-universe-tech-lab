@@ -92,7 +92,7 @@ const handleModalDetails = async (id) => {
 
 // handle modal 
 const setModalData = (data) => {
-    const { description, pricing, features, integrations, image_link: images } = data;
+    const { description, pricing, features, integrations, image_link: images, accuracy } = data;
     setInnerHTMLById('m-description', description);
 
     console.log(data);
@@ -158,6 +158,15 @@ const setModalData = (data) => {
     // modal image
     const modalImage = document.getElementById('m-image');
     modalImage.src = `${images[0]}`
+
+    // modal accuracy
+    // setInnerHTMLById('m-accuracy', '')
+    if (accuracy.score === null) {
+        document.getElementById('accuracy-container').classList.add('hidden');
+    } else {
+        document.getElementById('accuracy-container').classList.remove('hidden');
+        setInnerHTMLById('m-accuracy', `${accuracy.score} %accuracy`)
+    }
 }
 
 // set data by id
