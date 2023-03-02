@@ -50,7 +50,7 @@ const showToolsUI = (tool) => {
                 <p class="flex gap-4"><img src="./images/date-icon.svg" alt="date"><span
                         class="text-base font-normal">${date}</span></p>
             </div>
-            <label for="my-modal-3" class="btn bg-[#FEF7F7] border-0"><img src="./images/right-arrow.svg"
+            <label onclick="handleModalDetails('${id}')" for="AI-modal" class="btn bg-[#FEF7F7] border-0"><img src="./images/right-arrow.svg"
                     alt="see details"></label>
         </div>
     </div>
@@ -79,5 +79,89 @@ const seeMoreBtnShow = (isShowing) => {
         ? seeMoreBtn.classList.remove('hidden')
         : seeMoreBtn.classList.add('hidden');
 }
+
+// handle modal details 
+const handleModalDetails = async (id) => {
+    showLoading(true);
+    const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
+    const data = await res.json();
+    setModalData(data.data);
+    showLoading(false);
+}
+
+
+// handle modal 
+const setModalData = (data) => {
+    const { description, pricing, features, integrations } = data;
+    setInnerHTMLById('m-description', description);
+
+    // if (pricing) {
+    //     setInnerHTMLById('price-1', `${pricing[0]?.price ? pricing[0]?.price : 'free of cost'}`);
+    //     setInnerHTMLById('plan-1', `${pricing[0].plan}`);
+    // }
+
+    // pricing
+    // const pricingContainer = document.getElementById('pricing-container');
+    // pricingContainer.innerHTML = '';
+    // if (pricing) {
+
+    //     pricingContainer.innerHTML = `${pricing.map(p => {
+    //         let color = '#000000'; // default color
+    //         switch (p.plan) {
+    //             case 'Basic', 'Free':
+    //                 color = '#FF0000';
+    //                 break;
+    //             case 'Premium':
+    //                 color = '#00FF00';
+    //                 break;
+    //             case 'Pro':
+    //                 color = '#0000FF';
+    //                 break;
+    //         }
+    //         console.log(p);
+    //         return `
+    //         <div class="bg-white rounded-lg p-2">
+    //             <span style="color:${color}" class="font-bold text-base text-[#03A30A]">${p?.price === 'No cost' || p?.price === '0' ? 'free of cost/' : p.price}</span>
+    //             <span style="color:${color}" class="font-bold text-base text-[#03A30A]">${p?.plan}</span>
+    //         </div>`
+    //     }).join('')}
+    //     `;
+    // } else {
+    //     for (let i = 1; i <= 3; i++) {
+    //         pricingContainer.innerHTML += `
+    //         <div class="bg-white rounded-lg p-2">
+    //             <span class="font-bold text-base text-[#03A30A]">free of cost /</span>
+    //             <span class="font-bold text-base text-[#03A30A]">${i === 1 ? 'Basic' : (i === 2 ? 'Pro' : 'enterPrice')}</span>
+    //         </div>
+    //         `;
+    //     }
+    // }
+    //end pricing
+
+
+    // features
+    // const modalFeature = document.getElementById('m-feature');
+    // console.log(features);
+    // modalFeature.innerHTML += `
+
+    // `;
+
+    const modalIntegrations = document.getElementById('m-integrations');
+    if (integrations !== null) {
+        setInnerHTMLById('m-integrations', '');
+        setInnerHTMLById('m-integrations', `${integrations.map(i => `<li>${i}</li>`).join('')}`)
+    } else {
+        setInnerHTMLById('m-integrations', '');
+        setInnerHTMLById('m-integrations', `No Data Found`)
+    }
+
+
+}
+
+// set data by id
+const setInnerHTMLById = (id, value) => {
+    document.getElementById(id).innerHTML = value;
+}
+
 
 setAiDataUI();

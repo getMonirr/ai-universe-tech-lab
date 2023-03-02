@@ -39,7 +39,7 @@
         <!-- article section start -->
         <section id="tools-container" class="lg:grid grid-cols-3 gap-4 space-y-4 lg:space-y-0 justify-items-center">
             <!-- card/tools goes here -->
-            
+
         </section>
 
         <!-- see more button -->
@@ -51,34 +51,33 @@
         <!-- article section end -->
     </main>
     <!-- modal start-->
-    <input type="checkbox" id="my-modal-3" class="modal-toggle" />
+    <input type="checkbox" id="AI-modal" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box relative w-11/12 max-w-5xl">
-            <label for="my-modal-3"
+            <label for="AI-modal"
                 class="btn btn-sm btn-circle absolute right-2 top-2 bg-[#EB5757] text-white border-0">✕</label>
-            <div class="lg:grid grid-cols-2 gap-4 items-center space-y-4 lg:space-y-0">
+            <div class="lg:grid grid-cols-2 gap-4 items-center space-y-4 lg:space-y-0 p-4">
                 <div class="lg:p-8 p-4 border border-red-400 rounded-2xl bg-[rgba(235, 87, 87, 0.05)]">
-                    <h3 class="font-semibold lg:text-2xl text-[#111111] mb-6 text-center lg:text-left">ChatGPT is an
+                    <h3 id="m-description"
+                        class="font-semibold lg:text-2xl text-[#111111] mb-6 text-center lg:text-left">ChatGPT is an
                         AI-powered chatbot platform
                         that uses OpenAI's GPT technology to simulate human conversation.</h3>
-                    <div class="lg:flex justify-between gap-4 text-center space-y-4 lg:space-y-0">
-                        <div class="bg-white rounded-lg py-5 px-6">
-                            <span class="font-bold text-base text-[#03A30A]">$10/month
-                                Basic</span>
+                    <div id="pricing-container"
+                        class="lg:flex justify-between gap-4 text-center space-y-4 lg:space-y-0">
+                        <div class="bg-white rounded-lg p-2">
+                            <p class="font-bold text-base text-[#42c748]"> <span id="price-1">$10/month</span><span id="plan-1">Basic</span></p>
                         </div>
-                        <div class="bg-white rounded-lg py-5 px-6">
-                            <span class="font-bold text-base text-[#F28927]">$10/month
-                                Basic</span>
+                        <div class="bg-white rounded-lg p-2">
+                            <p class="font-bold text-base text-[#F28927]"> <span id="price-2">$10/month</span><span id="plan-2">Basic</span></p>
                         </div>
-                        <div class="bg-white rounded-lg py-5 px-6">
-                            <span class="font-bold text-base text-[#EB5757]">$10/month
-                                Basic</span>
+                        <div class="bg-white rounded-lg p-2">
+                            <p class="font-bold text-base text-[#EB5757]"> <span id="price-3">$10/month</span><span id="plan-3">Basic</span></p>
                         </div>
                     </div>
                     <div class="lg:flex gap-4 justify-between space-y-4 lg:space-y-0 h-full">
                         <div>
                             <h2 class="card-title text-2xl font-semibold my-5">Features</h2>
-                            <ul class="list-disc list-inside font-normal text-sm text-[#585858] indent-2">
+                            <ul id="m-feature" class="list-disc list-inside font-normal text-sm text-[#585858] indent-2">
                                 <li>Lorem ipsum dolor sit amet.</li>
                                 <li>Lorem ipsum dolor sit </li>
                                 <li>Lorem ipsum dolor sit amet.</li>
@@ -86,10 +85,8 @@
                         </div>
                         <div>
                             <h2 class="card-title text-2xl font-semibold my-5">Integrations</h2>
-                            <ul class="list-disc list-inside font-normal text-sm text-[#585858] indent-2">
-                                <li>Lorem ipsum </li>
-                                <li>Lorem ips </li>
-                                <li>Lorem ipsum dolor sit amet</li>
+                            <ul id="m-integrations" class="list-disc list-inside font-normal text-sm text-[#585858] indent-2">
+                                <!-- Integrations goes here  -->
                             </ul>
                         </div>
                     </div>
@@ -116,13 +113,18 @@
 
     <!-- loading start -->
     <div id="loader-element" class="mx-auto container text-center h-96 flex justify-center items-center hidden">
-        <button type="button" class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled="">
-            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        <button type="button"
+            class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed"
+            disabled="">
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                </path>
             </svg>
             Processing...
-          </button>
+        </button>
     </div>
     <!-- loading end -->
     <!-- javascript -->
