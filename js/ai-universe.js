@@ -1,5 +1,8 @@
+// global variable need
+const toolsContainer = document.getElementById('tools-container');
 // get all ai tools data
 const getAllAiTools = async () => {
+    showLoading(true);
     const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const data = await res.json();
     setAiDataUI(data.data.tools)
@@ -8,11 +11,13 @@ const getAllAiTools = async () => {
 
 // set ai tools data in UI
 const setAiDataUI = (data) => {
+    toolsContainer.innerHTML = '';
     data.forEach(tool => {
         showToolsUI(tool);
     });
+    showLoading(false);
 }
-getAllAiTools();
+
 
 // show tools/card in UI
 const showToolsUI = (tool) => {
@@ -21,10 +26,9 @@ const showToolsUI = (tool) => {
     console.log(tool);
 
     // ui card generate
-    const toolsContainer = document.getElementById('tools-container');
     toolsContainer.innerHTML += `
     <div class="w-full card card-compact bg-base-100 shadow-xl border p-6">
-    <figure><img src=${image} alt="Shoes" /></figure>
+    <figure class="h-full"><img src=${image} alt="Shoes" /></figure>
     <div class="card-body">
         <h2 class="card-title text-2xl font-semibold">Features</h2>
         <ul class="list-decimal list-inside font-normal text-base text-[#585858]">
@@ -44,3 +48,18 @@ const showToolsUI = (tool) => {
 </div>
     `;
 }
+
+// show or hide loader
+const showLoading = (isLoading) => {
+    const loaderElement = document.getElementById('loader-element');
+    isLoading
+        ? loaderElement.classList.remove('hidden')
+        : loaderElement.classList.add('hidden')
+
+}
+
+const handleSeeMore = () => {
+    
+}
+
+getAllAiTools();
