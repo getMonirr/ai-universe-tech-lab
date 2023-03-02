@@ -2,17 +2,23 @@
 const toolsContainer = document.getElementById('tools-container');
 // get all ai tools data
 const getAllAiTools = async () => {
-    showLoading(true);
+    // showLoading(true);
     const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const data = await res.json();
-    setAiDataUI(data.data.tools)
-     
+    return (data.data.tools)
+
 }
 
 // set ai tools data in UI
-const setAiDataUI = (data) => {
+const setAiDataUI = async (showAll) => {
+
+    const allAIData = await getAllAiTools();
     toolsContainer.innerHTML = '';
-    data.forEach(tool => {
+
+    let selectedData = 6;
+    showAll && (selectedData = allAIData.length);
+
+    allAIData.slice(0, selectedData).forEach(tool => {
         showToolsUI(tool);
     });
     showLoading(false);
@@ -22,8 +28,7 @@ const setAiDataUI = (data) => {
 // show tools/card in UI
 const showToolsUI = (tool) => {
     // destructuring
-    const {image,features,name,id,published_in:date} = tool;
-    console.log(tool);
+    const { image, features, name, id, published_in: date } = tool;
 
     // ui card generate
     toolsContainer.innerHTML += `
@@ -58,8 +63,10 @@ const showLoading = (isLoading) => {
 
 }
 
-const handleSeeMore = () => {
-    
-}
+document.getElementById('see-more-btn').addEventListener('click', (e) => {
+    setAiDataUI('shoAll');
+    e.target.style.display = 'none';
+})
 
-getAllAiTools();
+
+setAiDataUI();
