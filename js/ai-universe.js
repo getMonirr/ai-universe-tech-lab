@@ -92,9 +92,10 @@ const handleModalDetails = async (id) => {
 
 // handle modal 
 const setModalData = (data) => {
-    const { description, pricing, features, integrations } = data;
+    const { description, pricing, features, integrations, image_link: images } = data;
     setInnerHTMLById('m-description', description);
 
+    console.log(data);
     // if (pricing) {
     //     setInnerHTMLById('price-1', `${pricing[0]?.price ? pricing[0]?.price : 'free of cost'}`);
     //     setInnerHTMLById('plan-1', `${pricing[0].plan}`);
@@ -146,16 +147,17 @@ const setModalData = (data) => {
 
     // `;
 
-    const modalIntegrations = document.getElementById('m-integrations');
+    // integrations
+
+    setInnerHTMLById('m-integrations', '');
     if (integrations !== null) {
-        setInnerHTMLById('m-integrations', '');
         setInnerHTMLById('m-integrations', `${integrations.map(i => `<li>${i}</li>`).join('')}`)
     } else {
-        setInnerHTMLById('m-integrations', '');
         setInnerHTMLById('m-integrations', `No Data Found`)
     }
-
-
+    // modal image
+    const modalImage = document.getElementById('m-image');
+    modalImage.src = `${images[0]}`
 }
 
 // set data by id
