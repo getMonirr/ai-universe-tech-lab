@@ -2,7 +2,7 @@
 const toolsContainer = document.getElementById('tools-container');
 // get all ai tools data
 const getAllAiTools = async () => {
-    // showLoading(true);
+    showLoading(true);
     const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
     const data = await res.json();
     return (data.data.tools)
@@ -14,14 +14,18 @@ const setAiDataUI = async (showAll) => {
 
     const allAIData = await getAllAiTools();
     toolsContainer.innerHTML = '';
+    seeMoreBtnShow(true);
 
     let selectedData = 6;
-    showAll && (selectedData = allAIData.length);
+    showAll
+        && (selectedData = allAIData.length)
+        && seeMoreBtnShow(false);
 
     allAIData.slice(0, selectedData).forEach(tool => {
         showToolsUI(tool);
     });
     showLoading(false);
+
 }
 
 
@@ -62,11 +66,18 @@ const showLoading = (isLoading) => {
         : loaderElement.classList.add('hidden')
 
 }
-
+// see more button
 document.getElementById('see-more-btn').addEventListener('click', (e) => {
     setAiDataUI('shoAll');
-    e.target.style.display = 'none';
+    seeMoreBtnShow(false);
 })
 
+// see more button show or hide
+const seeMoreBtnShow = (isShowing) => {
+    const seeMoreBtn = document.getElementById('see-more-btn');
+    isShowing
+        ? seeMoreBtn.classList.remove('hidden')
+        : seeMoreBtn.classList.add('hidden');
+}
 
 setAiDataUI();
