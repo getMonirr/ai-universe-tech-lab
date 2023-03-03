@@ -93,9 +93,11 @@ const handleModalDetails = async (id) => {
 // handle modal 
 const setModalData = (data) => {
     const { description, pricing, features, integrations, image_link: images, accuracy, input_output_examples } = data;
+    // description 
+    setInnerHTMLById('m-description', '');
     setInnerHTMLById('m-description', description);
 
-    console.log(data);
+    // console.log(data);
     // if (pricing) {
     //     setInnerHTMLById('price-1', `${pricing[0]?.price ? pricing[0]?.price : 'free of cost'}`);
     //     setInnerHTMLById('plan-1', `${pricing[0].plan}`);
@@ -141,20 +143,25 @@ const setModalData = (data) => {
 
 
     // features
-    // const modalFeature = document.getElementById('m-feature');
-    // console.log(features);
-    // modalFeature.innerHTML += `
-
-    // `;
+    const modalFeature = document.getElementById('m-feature');
+    modalFeature.innerHTML = '';
+    if (features !== null) {
+        for (const key in features) {
+            modalFeature.innerHTML +=
+                `<li>${features[key].feature_name}</li>`;
+        }
+    } else {
+        setInnerHTMLById('m-feature', 'No data Found');
+    }
 
     // integrations
-
     setInnerHTMLById('m-integrations', '');
     if (integrations !== null) {
         setInnerHTMLById('m-integrations', `${integrations.map(i => `<li>${i}</li>`).join('')}`)
     } else {
         setInnerHTMLById('m-integrations', `No Data Found`)
     }
+
     // modal image
     const modalImage = document.getElementById('m-image');
     modalImage.src = `${images[0]}`
@@ -165,23 +172,24 @@ const setModalData = (data) => {
         document.getElementById('accuracy-container').classList.add('hidden');
     } else {
         document.getElementById('accuracy-container').classList.remove('hidden');
-        setInnerHTMLById('m-accuracy', `${accuracy.score} %accuracy`)
+        setInnerHTMLById('m-accuracy', `${accuracy.score}% accuracy`)
     }
+
     // input_output_examples
     setInnerHTMLById('in-out-example', '');
     if (input_output_examples) {
         const list = input_output_examples.map(e => {
             return `
-        <h2 class="card-title text-2xl font-semibold">${e.input}</h2>
-        <p>${e.output}</p>
-    `
+                        <h2 class="card-title text-2xl font-semibold">${e.input}</h2>
+                        <p>${e.output}</p>
+                    `
         }).join('');
         setInnerHTMLById('in-out-example', list);
     } else {
         const list = `
-        <h2 class="card-title text-2xl font-semibold">Can you give any example?</h2>
-        <p>No! Not Yet! Take a break!!!</p>
-        `;
+                    <h2 class="card-title text-2xl font-semibold">Can you give any example?</h2>
+                    <p>No! Not Yet! Take a break!!!</p>
+                `;
         setInnerHTMLById('in-out-example', list);
     }
 }
