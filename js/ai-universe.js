@@ -92,7 +92,7 @@ const handleModalDetails = async (id) => {
 
 // handle modal 
 const setModalData = (data) => {
-    const { description, pricing, features, integrations, image_link: images, accuracy } = data;
+    const { description, pricing, features, integrations, image_link: images, accuracy, input_output_examples } = data;
     setInnerHTMLById('m-description', description);
 
     console.log(data);
@@ -160,12 +160,29 @@ const setModalData = (data) => {
     modalImage.src = `${images[0]}`
 
     // modal accuracy
-    // setInnerHTMLById('m-accuracy', '')
+    setInnerHTMLById('m-accuracy', '')
     if (accuracy.score === null) {
         document.getElementById('accuracy-container').classList.add('hidden');
     } else {
         document.getElementById('accuracy-container').classList.remove('hidden');
         setInnerHTMLById('m-accuracy', `${accuracy.score} %accuracy`)
+    }
+    // input_output_examples
+    setInnerHTMLById('in-out-example', '');
+    if (input_output_examples) {
+        const list = input_output_examples.map(e => {
+            return `
+        <h2 class="card-title text-2xl font-semibold">${e.input}</h2>
+        <p>${e.output}</p>
+    `
+        }).join('');
+        setInnerHTMLById('in-out-example', list);
+    } else {
+        const list = `
+        <h2 class="card-title text-2xl font-semibold">Can you give any example?</h2>
+        <p>No! Not Yet! Take a break!!!</p>
+        `;
+        setInnerHTMLById('in-out-example', list);
     }
 }
 
