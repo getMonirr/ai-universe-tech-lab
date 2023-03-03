@@ -171,7 +171,7 @@ const setModalData = (data) => {
     }
 
     // modal image
-    const modalImage = document.getEjlementById('m-image');
+    const modalImage = document.getElementById('m-image');
     modalImage.src = `${images[0]}`
 
     // modal accuracy
@@ -186,7 +186,7 @@ const setModalData = (data) => {
     // input_output_examples
     setInnerHTMLById('in-out-example', '');
     if (input_output_examples) {
-        const list = input_output_examples.map(e => {
+        const list = input_output_examples.slice(0, 1).map(e => {
             return `
                         <h2 class="card-title text-lg lg:text-2xl font-semibold">${e.input}</h2>
                         <p>${e.output}</p>
