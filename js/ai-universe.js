@@ -36,7 +36,7 @@ const showToolsUI = (tool) => {
 
     // ui card generate
     toolsContainer.innerHTML += `
-    <div class="w-full card card-compact bg-base-100 shadow-xl border p-6">
+    <div id="tool" class="w-full card card-compact bg-base-100 shadow-xl border p-6">
     <figure class="h-full"><img src=${image} alt="Shoes" /></figure>
     <div class="card-body">
         <h2 class="card-title text-2xl font-semibold">Features</h2>
@@ -48,7 +48,7 @@ const showToolsUI = (tool) => {
             <div class="space-y-4">
                 <h3 class="font-semibold text-2xl">${name}</h3>
                 <p class="flex gap-4"><img src="./images/date-icon.svg" alt="date"><span
-                        class="text-base font-normal">${date}</span></p>
+                        class="text-base font-normal" id="tool-date">${date}</span></p>
             </div>
             <label onclick="handleModalDetails('${id}')" for="AI-modal" class="btn bg-[#FEF7F7] border-0"><img src="./images/right-arrow.svg"
                     alt="see details"></label>
@@ -207,6 +207,33 @@ const setInnerHTMLById = (id, value) => {
     document.getElementById(id).innerHTML = value;
 }
 
+// sort by date
+let isDescending = true;
+const handleSort = () => {
+    // console.log('iam clicked');
+    const tools = [...document.querySelectorAll('#tool')];
+    // console.log(tools[1].querySelector('#tool-date').innerText);
+    // tools.forEach(tool => {
+    //     const value = tool.querySelector('#tool-date').innerText;
+    //     const toolDate = new Date(value)
+    //     console.log(toolDate - diffDate);
+    // })
+    tools.sort((a, b) => {
+        const aValue = new Date(a.querySelector('#tool-date').innerText);
+        const bValue = new Date(b.querySelector('#tool-date').innerText);
 
+        if (aValue > bValue) {
+            return isDescending ? 1 : - 1;
+        } else if (aValue < bValue) {
+            return isDescending ? -1 : 1;
+        } else {
+            return 0;
+        }
+    })
+    // console.log(tools[1].querySelector('#tool-date').innerText);
+    const toolsContainer = document.getElementById('tools-container');
+    tools.forEach(tools => toolsContainer.appendChild(tools));
+    isDescending = !isDescending;
+}
 
 setAiDataUI();
