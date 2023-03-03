@@ -2,10 +2,14 @@
 const toolsContainer = document.getElementById('tools-container');
 // get all ai tools data
 const getAllAiTools = async () => {
-    showLoading(true);
-    const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
-    const data = await res.json();
-    return (data.data.tools)
+    try {
+        showLoading(true);
+        const res = await fetch(`https://openapi.programming-hero.com/api/ai/tools`);
+        const data = await res.json();
+        return (data.data.tools)
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 
@@ -82,11 +86,16 @@ const seeMoreBtnShow = (isShowing) => {
 
 // handle modal details 
 const handleModalDetails = async (id) => {
-    showLoading(true);
-    const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
-    const data = await res.json();
-    setModalData(data.data);
-    showLoading(false);
+    try {
+        showLoading(true);
+        const res = await fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`);
+        const data = await res.json();
+        setModalData(data.data);
+        showLoading(false);
+
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 
