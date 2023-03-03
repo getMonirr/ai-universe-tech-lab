@@ -46,7 +46,7 @@ const showToolsUI = (tool) => {
         <hr class="my-4">
         <div class="card-actions justify-between items-center">
             <div class="space-y-4">
-                <h3 class="font-semibold text-2xl">${name}</h3>
+                <h3 class="font-semibold text-xl lg:text-2xl">${name}</h3>
                 <p class="flex gap-4"><img src="./images/date-icon.svg" alt="date"><span
                         class="text-base font-normal" id="tool-date">${date}</span></p>
             </div>
@@ -188,14 +188,14 @@ const setModalData = (data) => {
     if (input_output_examples) {
         const list = input_output_examples.map(e => {
             return `
-                        <h2 class="card-title text-2xl font-semibold">${e.input}</h2>
+                        <h2 class="card-title text-lg lg:text-2xl font-semibold">${e.input}</h2>
                         <p>${e.output}</p>
                     `
         }).join('');
         setInnerHTMLById('in-out-example', list);
     } else {
         const list = `
-                    <h2 class="card-title text-2xl font-semibold">Can you give any example?</h2>
+                    <h2 class="card-title text-xl lg:text-2xl font-semibold">Can you give any example?</h2>
                     <p>No! Not Yet! Take a break!!!</p>
                 `;
         setInnerHTMLById('in-out-example', list);
