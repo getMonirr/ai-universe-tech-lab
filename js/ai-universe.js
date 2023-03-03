@@ -171,7 +171,7 @@ const setModalData = (data) => {
     }
 
     // modal image
-    const modalImage = document.getElementById('m-image');
+    const modalImage = document.getEjlementById('m-image');
     modalImage.src = `${images[0]}`
 
     // modal accuracy
@@ -180,7 +180,7 @@ const setModalData = (data) => {
         document.getElementById('accuracy-container').classList.add('hidden');
     } else {
         document.getElementById('accuracy-container').classList.remove('hidden');
-        setInnerHTMLById('m-accuracy', `${accuracy.score}% accuracy`)
+        setInnerHTMLById('m-accuracy', `${(accuracy.score * 100)}% accuracy`)
     }
 
     // input_output_examples
