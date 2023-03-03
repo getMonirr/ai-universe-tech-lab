@@ -104,41 +104,49 @@ const setModalData = (data) => {
     // }
 
     // pricing
-    // const pricingContainer = document.getElementById('pricing-container');
-    // pricingContainer.innerHTML = '';
-    // if (pricing) {
-
-    //     pricingContainer.innerHTML = `${pricing.map(p => {
-    //         let color = '#000000'; // default color
-    //         switch (p.plan) {
-    //             case 'Basic', 'Free':
-    //                 color = '#FF0000';
-    //                 break;
-    //             case 'Premium':
-    //                 color = '#00FF00';
-    //                 break;
-    //             case 'Pro':
-    //                 color = '#0000FF';
-    //                 break;
-    //         }
-    //         console.log(p);
-    //         return `
-    //         <div class="bg-white rounded-lg p-2">
-    //             <span style="color:${color}" class="font-bold text-base text-[#03A30A]">${p?.price === 'No cost' || p?.price === '0' ? 'free of cost/' : p.price}</span>
-    //             <span style="color:${color}" class="font-bold text-base text-[#03A30A]">${p?.plan}</span>
-    //         </div>`
-    //     }).join('')}
-    //     `;
-    // } else {
-    //     for (let i = 1; i <= 3; i++) {
-    //         pricingContainer.innerHTML += `
-    //         <div class="bg-white rounded-lg p-2">
-    //             <span class="font-bold text-base text-[#03A30A]">free of cost /</span>
-    //             <span class="font-bold text-base text-[#03A30A]">${i === 1 ? 'Basic' : (i === 2 ? 'Pro' : 'enterPrice')}</span>
-    //         </div>
-    //         `;
-    //     }
-    // }
+    const pricingContainer = document.getElementById('pricing-container');
+    pricingContainer.innerHTML = '';
+    if (pricing) {
+        pricingContainer.innerHTML = `${pricing.map(p => {
+            let color = '#000000';
+            switch (p.plan) {
+                case 'Basic':
+                case 'Free':
+                case 'Starter':
+                    color = '#03A30A';
+                    break;
+                case 'Premium':
+                case 'Pro':
+                case 'Professional':
+                    color = '#F28927';
+                    break;
+                case 'Enterprise':
+                case 'Microsoft Advertising':
+                    color = '#EB5757';
+                    break;
+            }
+            return `
+            <div class="bg-white rounded-lg p-2">
+                <span style="color:${color}" class="font-bold text-base text-[#03A30A]">${p?.price === 'No cost' || p?.price === '0' ? 'free of cost/' : p.price}</span>
+                <span style="color:${color}" class="font-bold text-base text-[#03A30A]">/${p?.plan}</span>
+            </div>`
+        }).join('')}
+        `;
+    } else {
+        for (let i = 1; i <= 3; i++) {
+            pricingContainer.innerHTML += `
+            <div class="bg-white rounded-lg p-2">
+                ${i === 1
+                    ? '<span class="font-bold text-base text-[#03A30A]">free of cost/Basic</span>'
+                    : (i === 2
+                        ? '<span class="font-bold text-base text-[#F28927]">free of cost/Pro</span>'
+                        : '<span class="font-bold text-base text-[#EB5757]">free of cost/EnterPrice</span>'
+                    )
+                }
+            </div>
+            `;
+        }
+    }
     //end pricing
 
 
@@ -198,6 +206,7 @@ const setModalData = (data) => {
 const setInnerHTMLById = (id, value) => {
     document.getElementById(id).innerHTML = value;
 }
+
 
 
 setAiDataUI();
